@@ -1,0 +1,40 @@
+﻿@using PagedList
+@using PagedList.Mvc
+@model IPagedList<Nimap_Machine_Test.Models.Product__model>
+
+
+
+<h2>Product</h2>
+
+<p>
+    @Html.ActionLink("New Product Insert", "insertproduct")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ProductId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ProductName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "ProductEdit", new { id = item.ProductId }) |
+
+                @Html.ActionLink("Delete", "ProductDelete", new { id = item.ProductId })
+            </td>
+        </tr>
+    }
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+</table>
